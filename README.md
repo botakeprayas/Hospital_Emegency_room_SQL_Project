@@ -32,3 +32,42 @@ CREATE TABLE Project (
     wait_time VARCHAR(20)
 );
 ```
+## Data Analysis & Findings
+1.Find Avg Patient_Wait Time
+```sql
+SELECT ROUND(AVG(patient_waittime),2) AS
+Average_wait_time 
+FROM hospital_emergency_data;
+
+```
+ 2. Find patient satisfaction scores vary between 
+admitted and non-admitted patients?
+```sql
+select admission_status,(avg(patient_satisfaction_score))
+as satisfaction_score from hospital_emergency_data 
+group by admission_status ;
+```
+3. Find the total number of patients by gender and age group.
+```sql
+SELECT patient_gender,`Age group`,count(*)
+AS total_patients FROM hospital_emergency_data
+GROUP BY  patient_gender,`Age group`
+ORDER BY COUNT(*) ;
+```
+ 4. What percentage of patients are admitted vs. not admitted
+```sql
+SELECT 
+admission_status,
+COUNT(*) AS total_patients,
+ROUND((COUNT(*) * 100 / (SELECT COUNT(*) FROM hospital_emergency_data)), 2)
+AS percentage
+FROM hospital_emergency_data
+GROUP BY admission_status;
+```
+5. Find the correlation between waiting time and satisfaction
+```sql
+SELECT wait_time,ROUND(AVG(patient_satisfaction_score))
+AS avg_satisfaction FROM hospital_emergency_data
+GROUP BY wait_time ;
+```
+
