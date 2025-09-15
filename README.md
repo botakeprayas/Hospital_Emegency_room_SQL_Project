@@ -10,3 +10,23 @@ Operational Efficiency– Calculate average waiting times and identify departmen
  Equity in Care– Identify race groups with the highest admission rates.
  Critical Extremes– Retrieve the youngest and oldest admitted patients to understand edge cases.
  Root Cause of Delays– Find departments where average waiting times exceed acceptable limits.
+ ## Project Structure
+ Database Creation: The project starts by creating a database named emegency_hospital_data.
+CREATE DATABASE emegency_hospital_data;
+USE hospital_emergency_data;
+CREATE TABLE Project (
+    patient_id varchar(23) PRIMARY KEY,
+    patient_admission_date DATETIME,
+    patient_first_inital CHAR(1),
+    patient_last_name VARCHAR(50),
+    patient_gender VARCHAR(10),
+    patient_age TINYINT,
+    Age_group VARCHAR(10),
+    patient_race VARCHAR(20),
+    department_referral VARCHAR(50),
+    patient_admission_flag BOOLEAN,
+    admission_status VARCHAR(20),
+    patient_satisfaction_score TINYINT,
+    patient_waittime SMALLINT,
+    wait_time VARCHAR(20)
+);
