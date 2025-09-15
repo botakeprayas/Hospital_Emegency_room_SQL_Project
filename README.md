@@ -70,4 +70,16 @@ SELECT wait_time,ROUND(AVG(patient_satisfaction_score))
 AS avg_satisfaction FROM hospital_emergency_data
 GROUP BY wait_time ;
 ```
+6. NO of patient by department referral
+```sql
+SELECT department_referral,COUNT(*)
+AS total_patients FROM hospital_emergency_data 
+GROUP BY department_referral ORDER BY COUNT(*);
+```
+7. Identify the race group with the highest admission rate.
+   ```sql
+   SELECT patient_race,ROUND((COUNT(*)/(SELECT COUNT(*) FROM hospital_emergency_data)) * 100,2)
+AS admissin_rate FROM hospital_emergency_data
+GROUP BY patient_race ORDER BY COUNT(*) DESC LIMIT 5 ;
+```
 
