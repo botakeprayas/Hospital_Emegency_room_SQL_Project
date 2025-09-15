@@ -77,9 +77,65 @@ AS total_patients FROM hospital_emergency_data
 GROUP BY department_referral ORDER BY COUNT(*);
 ```
 7. Identify the race group with the highest admission rate.
-   ```sql
-   SELECT patient_race,ROUND((COUNT(*)/(SELECT COUNT(*) FROM hospital_emergency_data)) * 100,2)
+```sql
+SELECT patient_race,ROUND((COUNT(*)/(SELECT COUNT(*) FROM hospital_emergency_data)) * 100,2)
 AS admissin_rate FROM hospital_emergency_data
 GROUP BY patient_race ORDER BY COUNT(*) DESC LIMIT 5 ;
 ```
+ 8. Retrieve the youngest and oldest patients admitted.
+```sql
+SELECT MAX(patient_age) AS oldest_age,MIN(patient_age)
+AS youngest_age FROM hospital_emergency_data
+WHERE admission_status="admitted";
+```
+9. find the most common age group for admitted patients.
+```sql
+    SELECT `Age group`,COUNT(*) AS admitted_count
+FROM hospital_emergency_data
+WHERE admission_status = 'Admitted'
+GROUP BY `Age group`
+ORDER BY admitted_count DESC
+LIMIT 1;
+```
+10. Get the top 3 departments where patients waited 
+more than 30 minutes on average.
+```sql
+SELECT department_referral,ROUND(AVG(patient_waittime),2)
+AS avg_waittime FROM hospital_emergency_data
+GROUP BY department_referral 
+HAVING AVG(patient_waittime) > 30
+ORDER BY avg_waittime DESC
+LIMIT 3;
+```
+
+## Findings
+Patient Demographics: Data covers 9,216 emergency patients across varied age groups, genders, and races.
+
+Waiting Times: Average waits are high, with some departments exceeding 45 minutes.
+
+Satisfaction & Admission: Admitted patients show higher satisfaction; non-admissions need better handling.
+
+Admission Trends: X% admitted vs. Y% not admitted, reflecting triage efficiency but limited capacity.
+
+Departmental Insights: General Practice and Orthopedics face heavy referral loads; some departments show recurring delays.
+
+Equity in Care: One race group has highest admission rates, suggesting possible bias concerns.
+
+Critical Extremes: Cases span from infants to elderly, highlighting wide emergency care needs.
+
+## Reports
+Operational Summary: Wait times, departmental delays, and referral hotspots.
+
+Demographics Report: Age, gender, and race breakdown.
+
+Satisfaction Report: Admission vs. non-admission experience gaps.
+
+Admission Trends Report: Ratios by age and race.
+
+Department Performance: Referral volume and staffing needs.
+
+Equity Report: Admission rate patterns across racial groups.
+
+# Conclusion
+This SQL project turns emergency hospital data into clear insights, exposing bottlenecks, disparities, and strengths. Key actions include reducing wait times, improving non-admission experiences, ensuring equity, and preparing for diverse patient needs. Beyond analysis, the project highlights the real impact of SQL-driven decisions on healthcare outcomes.
 
