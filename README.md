@@ -12,6 +12,7 @@ Operational Efficiency– Calculate average waiting times and identify departmen
  Root Cause of Delays– Find departments where average waiting times exceed acceptable limits.
  ## Project Structure
  Database Creation: The project starts by creating a database named emegency_hospital_data.
+'''sql
 CREATE DATABASE emegency_hospital_data;
 USE hospital_emergency_data;
 CREATE TABLE Project (
@@ -30,3 +31,4 @@ CREATE TABLE Project (
     patient_waittime SMALLINT,
     wait_time VARCHAR(20)
 );
+'''
